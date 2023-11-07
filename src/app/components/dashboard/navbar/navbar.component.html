@@ -1,0 +1,61 @@
+
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <h1 class="example-app-name">EasyIn EasyOut</h1>
+    <span class="example-spacer" ></span>
+    <button routerLink="/logout" mat-icon-button>
+        <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+
+
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let item of menu" [routerLink]="item.redirect">
+          <mat-icon>{{item.icon}}</mat-icon> {{ item.nombre }}</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+<div *ngIf="!shouldRun">Please open on Stackblitz to see result</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--mat-toolbar color="primary">
+    <span>EasyIn EasyOut Parking</span>
+    <span class="example-spacer" ></span>
+    <button mat-button *ngFor="let item of menu" [routerLink]="item.redirect">{{ item.nombre }}</button>
+
+    <span class="example-spacer" ></span>
+    <button routerLink="/logout" mat-icon-button aria-label="Example icon button with a home icon">
+        <mat-icon>logout</mat-icon>
+    </button>
+
+</!--mat-toolbar-->

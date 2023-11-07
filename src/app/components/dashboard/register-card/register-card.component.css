@@ -1,0 +1,51 @@
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  height: 60vh; /* Agrega la altura completa de la vista */
+}
+
+.register {
+  max-width: 500px; /* Ajusta el ancho máximo del formulario */
+  padding: 20px; /* Añade un espacio en el interior del formulario */
+  background-color: #fff; /* Define un fondo blanco para el formulario */
+  border-radius: 5px; /* Agrega bordes redondeados al formulario */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Agrega una sombra suave */
+  text-align: center; /* Centra el contenido del formulario */
+}
+
+form {
+  width: 500px;
+}
+
+h2 {
+  text-align: center;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+mat-label {
+  font-size: 16px;
+}
+
+mat-input {
+  font-size: 16px;
+}
+
+mat-checkbox {
+  display: block;
+  font-size: 16px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  margin-top: 20px;
+}

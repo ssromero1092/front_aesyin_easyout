@@ -1,0 +1,39 @@
+<div class="body">
+  <div class="login">
+    <mat-spinner *ngIf="loading" diameter="50" class="spinner"></mat-spinner>
+    <div *ngIf="!loading">
+
+      <mat-card>
+        <mat-card-content>
+          <div class="left">
+            <mat-card-content>
+              <h1 class="titulo-llamativo">EasyIn EasyOut Parking</h1>
+            </mat-card-content>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card>
+        <mat-card-content>
+          <form #loginform="ngForm" (ngSubmit)="onSubmit(loginform)">
+            <h2>Sign in</h2>
+            <!--mat-error>El email y password no corresponden</!--mat-error-->
+            <mat-form-field>
+              <input matInput type="email" name="email" placeholder="Email" ngModel>
+              <mat-error>El email no es valido</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="password" name="password" placeholder="Password" ngModel>
+              <mat-error>El password no es valido</mat-error>
+            </mat-form-field>
+            <div style="text-align: center;">
+              <button mat-raised-button type="submit" color="primary">Sign in</button>
+              <br><br>
+              <button mat-raised-button color="accent" (click)="createAcocount()">Create account</button>
+
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<mat-toolbar>
+  <span>Register Card</span>
+</mat-toolbar>
+  <div class="body">
+    <div class="register">
+        <form #registercardform="ngForm" (ngSubmit)="onSubmit(registercardform)">
+          <mat-form-field>
+            <mat-label>Credit Card Number</mat-label>
+            <input matInput type="text" name="cardNumber" ngModel>
+          </mat-form-field>
+
+          <mat-form-field class="width: 100%;">
+            <mat-label>Due Date</mat-label>
+            <input matInput type="text" name="dueDate" ngModel>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>CVV</mat-label>
+            <input matInput type="password" name="cvv" ngModel autocomplete="current-password">
+          </mat-form-field>
+
+          <mat-checkbox name="autoDebit" ngModel>Do you accept automatic debit?</mat-checkbox>
+
+
+          <button type="submit" mat-raised-button color="primary">Save</button>
+      <br>
+
+      <button type="button" mat-raised-button color="accent">Cancel</button>
+        </form>
+    </div>
+  </div>

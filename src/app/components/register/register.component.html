@@ -1,0 +1,60 @@
+<div class="body">
+  <div class="login">
+    <mat-spinner *ngIf="loading" diameter="50" class="spinner"></mat-spinner>
+    <div *ngIf="!loading">
+
+      <form #registerform="ngForm" (ngSubmit)="onSubmit(registerform)">
+        <h2>Register your personal information</h2>
+        <mat-form-field>
+          <mat-label>Document Type</mat-label>
+          <mat-select [(ngModel)]="user.typeDocument" name="typeDocument" ngModel required>
+            <mat-option value="CC">Cédula de Ciudadanía (CC)</mat-option>
+            <mat-option value="TI">Tarjeta de Identidad (TI)</mat-option>
+            <mat-option value="NA">No Aplica (N/A)</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Document</mat-label>
+          <input [(ngModel)]="user.document" matInput type="text" name="document" ngModel required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input [(ngModel)]="user.firstName" matInput type="text" name="firstName" ngModel required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input [(ngModel)]="user.lastName" matInput type="text" name="lastName" ngModel>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input [(ngModel)]="user.email" matInput type="email" name="email" ngModel required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input [(ngModel)]="user.password" matInput type="password" name="password" ngModel required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Confirm Password</mat-label>
+          <input [(ngModel)]="user.confPassword" matInput type="password" name="confPassword" ngModel required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Phone</mat-label>
+          <input [(ngModel)]="user.phone" matInput type="text" name="phone" ngModel>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Address</mat-label>
+          <input [(ngModel)]="user.address" matInput type="text" name="address" ngModel>
+        </mat-form-field>
+        <div class="row">
+          <div class="col-md-2">
+            <button type="submit" mat-raised-button type="submit" color="primary">Save</button>
+          </div>
+          <div class="col-md-2">
+            <button mat-raised-button type="button" color="accent" (click)="login()">Cancel</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
