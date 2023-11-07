@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit{
   onSubmit(form: NgForm): void {
     console.log(form.value);
 
-    const { typeDocument, document, firstname, lastname, password, confPassword, phone, address} = form.value;
+    const { typeDocument, document, firstname, lastname, password, confPassword, phone, address, email} = form.value;
 
 
     if (
@@ -64,7 +64,8 @@ export class RegisterComponent implements OnInit{
     } else if (password !== confPassword) {
       this.openSnackBar('Passwords do not match', 'Continue');
     } else {
-      const user = {
+    
+      this.userService.register({
         typeDocument,
         document,
         name: firstname + ' ' + lastname,
@@ -72,14 +73,8 @@ export class RegisterComponent implements OnInit{
         confPassword,
         phone,
         address,
-      };
-
-
-
-      console.log(user);
-
-
-      this.userService.register(user).subscribe(
+        email
+      }).subscribe(
         data => {
           this.userService.setToken(data.token);
           //this.router.navigateByUrl("/");

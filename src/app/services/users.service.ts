@@ -25,7 +25,7 @@ export class UsersService {
   register(user: any): Observable<any> {
     const strEndPoint = urlAPI + endpoint;
     console.log(user);
-    return this.http.post<Response>(strEndPoint, { user }, {  observe: 'response' })
+    return this.http.post<Response>(strEndPoint, user, {  observe: 'response' })
   }
 
   setToken(token: string) {
