@@ -25,13 +25,16 @@ export class TokenInterceptorService implements HttpInterceptor{
     console.log(token);
 
     let request = req;
+    //console.log({request});
+
 
     if (token) {
       request = req.clone({
         setHeaders: {
-          authorization: `${ token }`
-        }
+          authorization: `${ token }`,
+        },
       });
+      console.log({request});
     }
     return next.handle(request).pipe(catchError((err: HttpErrorResponse) => {
 

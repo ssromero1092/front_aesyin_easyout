@@ -42,7 +42,7 @@ export class RegisterVehicleComponent {
     }).subscribe((res) => {
       console.log(res);
 
-        this.openSnackBar('usuario se registro correctamente', '');
+        this.openSnackBar('vahiculo se registro correctamente', '');
 
     },
       (e) => {

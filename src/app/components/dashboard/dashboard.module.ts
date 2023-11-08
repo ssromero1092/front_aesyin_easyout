@@ -4,7 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { RegisterCardComponent } from './register-card/register-card.component';
 import { RegisterVehicleComponent } from './register-vehicle/register-vehicle.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,6 +25,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { TokenInterceptorService } from 'src/app/services/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatCheckboxModule,
     MatSidenavModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class DashboardModule { }
