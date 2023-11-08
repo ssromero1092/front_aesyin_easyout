@@ -15,6 +15,10 @@
   text-align: center; /* Centra el contenido del formulario */
 }
 
+.required-field {
+  border: 2px solid red; /* Puedes ajustar el estilo a tu preferencia */
+}
+
 form {
   width: 500px;
 }

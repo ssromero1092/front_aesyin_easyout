@@ -2,6 +2,8 @@ import { Menu } from './../../../interfaces/menu';
 import { MenuService } from './../../../services/menu.service';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
+import { UsersService } from 'src/app/services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +14,10 @@ export class NavbarComponent implements OnInit {
   mobileQuery: MediaQueryList;
   menu: Menu[] = [];
   private _mobileQueryListener: () => void;
-  constructor(changeDetectorRef: ChangeDetectorRef,
+  constructor(
+    public userService: UsersService,
+    private router: Router,
+    changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private _menuService: MenuService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -28,9 +33,12 @@ export class NavbarComponent implements OnInit {
   }
   cargarMenu(){
     this._menuService.getMenu().subscribe(data => {
-
       this.menu = data;
 
     })
+  }
+  logout(){
+    this.userService.removeToken();
+    this.router.navigate(['/login']);
   }
 }

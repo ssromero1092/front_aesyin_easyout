@@ -10,22 +10,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent implements OnInit {
 
 
   loading = false;
 
   user = {
-    typeDocument:'',
-    document:'',
-    firstName:'',
-    lastName:'',
-    name :'',
-    email:'',
-    password:'',
-    confPassword:'',
-    phone:'',
-    address:'',
+    typeDocument: '',
+    document: '',
+    firstName: '',
+    lastName: '',
+    name: '',
+    email: '',
+    password: '',
+    confPassword: '',
+    phone: '',
+    address: '',
   };
 
   constructor(
@@ -36,22 +36,22 @@ export class RegisterComponent implements OnInit{
   }
 
   ngOnInit(): void {
-      this.user.typeDocument='CC';
-      this.user.document='1088010149';
-      this.user.firstName='Simon';
-      this.user.lastName='Romero';
-      this.user.name='Simon Romero';
-      this.user.email='ssromero@utp.edu.co';
-      this.user.password='123';
-      this.user.confPassword='123';
-      this.user.phone='3136452100';
-      this.user.address='calle 123';
+    this.user.typeDocument = 'CC';
+    this.user.document = '1088010149';
+    this.user.firstName = 'Simon';
+    this.user.lastName = 'Romero';
+    this.user.name = 'Simon Romero';
+    this.user.email = 'ssromero@utp.edu.co';
+    this.user.password = '123';
+    this.user.confPassword = '123';
+    this.user.phone = '3136452100';
+    this.user.address = 'calle 123';
   }
 
   onSubmit(form: NgForm): void {
     console.log(form.value);
 
-    const { typeDocument, document, firstname, lastname, password, confPassword, phone, address, email} = form.value;
+    const { typeDocument, document, firstName, lastName, email, password, confPassword, phone, address, } = form.value;
 
 
     if (
@@ -60,28 +60,29 @@ export class RegisterComponent implements OnInit{
       !password ||
       !confPassword
     ) {
-      this.openSnackBar('Please complete all required fields', 'Continue');
+      this.openSnackBar('Please complete all required fields', '');
     } else if (password !== confPassword) {
-      this.openSnackBar('Passwords do not match', 'Continue');
+      this.openSnackBar('Passwords do not match', '');
     } else {
-    
+      const name = firstName + ' ' + lastName
+
       this.userService.register({
         typeDocument,
         document,
-        name: firstname + ' ' + lastname,
+        name,
         password,
         confPassword,
         phone,
         address,
         email
-      }).subscribe(
-        data => {
-          this.userService.setToken(data.token);
-          //this.router.navigateByUrl("/");
+      }).subscribe((res) => {
+
+          this.openSnackBar('usuario se registro correctamente', '');
           this.cargando();
-        },
-        error => {
-          console.log(error);
+
+      },
+        (e) => {
+          this.openSnackBar(e.error.detail, '');
         });
 
     }
@@ -95,12 +96,17 @@ export class RegisterComponent implements OnInit{
     this.loading = true;
     setTimeout(() => {
 
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['/login']);
     }, 1500);
   }
 
   login() {
     this.router.navigate(['/login']);
+    this.loading = true;
+    setTimeout(() => {
+
+      this.router.navigate(['/login']);
+    }, 1500);
   }
 
   openSnackBar(message: string, action: string) {
