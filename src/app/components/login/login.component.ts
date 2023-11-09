@@ -19,17 +19,19 @@ export class LoginComponent implements OnInit{
   ) {
   }
   ngOnInit(){
-    this.userService.removeToken();
+    //this.userService.removeToken();
+    sessionStorage.removeItem('token');
+
   }
   onSubmit(form: NgForm): void {
     const email = form.value.email;
     const password = form.value.password;
     const password_valid = form.value.email + '+' + form.value.password;
     const user = { email: email, password: password };
+
     this.userService.login(
       btoa(password_valid)
     ).subscribe((data) => {
-      console.log(data.data.token);
       this.userService.setToken(data.data.token,data.data.idClient);
       this.cargando();
     },

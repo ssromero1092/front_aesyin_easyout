@@ -15,6 +15,21 @@
   text-align: center; /* Centra el contenido del formulario */
 }
 
+.body1 {
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.register1 {
+  max-width: 1000px; /* Ajusta el ancho máximo del formulario a 800px o el valor que desees */
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin: 0 auto; /* Centra el formulario horizontalmente en el contenedor */
+}
+
 .required-field {
   border: 2px solid red; /* Puedes ajustar el estilo a tu preferencia */
 }
@@ -53,3 +68,13 @@ mat-checkbox {
 button {
   margin-top: 20px;
 }
+
+.spinner{
+  margin: 0 auto;
+}
+
+mat-cell {
+  text-align: center;
+}
+
+

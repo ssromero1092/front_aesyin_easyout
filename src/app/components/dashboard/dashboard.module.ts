@@ -23,7 +23,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TokenInterceptorService } from 'src/app/services/token-interceptor.service';
 
@@ -55,7 +55,8 @@ import { TokenInterceptorService } from 'src/app/services/token-interceptor.serv
     MatListModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
-    MatSidenavModule
+    MatSidenavModule,
+    NgbModalModule,
   ],
   providers: [
     {

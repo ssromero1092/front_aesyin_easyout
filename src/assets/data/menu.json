@@ -1,18 +1,18 @@
 [
     {
-        "nombre":"home",
+        "nombre":"Home",
         "redirect": "/dashboard",
         "icon": "home"
     },
-    {
-        "nombre":"registercard",
-        "redirect": "/dashboard/registercard",
-        "icon": "credit_card"
-    },
 
     {
-      "nombre":"registervehicle",
+      "nombre":"Register Vehicle",
       "redirect": "/dashboard/registervehicle",
-      "icon": "credit_card"
-  }
+      "icon": "directions_car"
+    },
+    {
+        "nombre":"Register Card",
+        "redirect": "/dashboard/registercard",
+        "icon": "credit_card"
+    }
 ]

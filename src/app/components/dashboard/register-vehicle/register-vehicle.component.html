@@ -1,26 +1,71 @@
-<mat-toolbar>
-  <span>Register Vehicle</span>
-</mat-toolbar>
-<div class="body">
-  <div class="register">
-    <form #registercardform="ngForm" (ngSubmit)="onSubmit(registercardform)">
-      <mat-form-field>
-        <mat-label>License Plate</mat-label>
-        <input matInput type="text" name="plate" ngModel required>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Brand</mat-label>
-        <input matInput type="text" name="brand" ngModel autocomplete="current-password" required>
-      </mat-form-field>
-      <mat-form-field class="width: 100%;">
-        <mat-label>Model</mat-label>
-        <input matInput type="text" name="model" ngModel required>
-      </mat-form-field>
+<mat-spinner *ngIf="loading" diameter="50" class="spinner"></mat-spinner>
+<div *ngIf="!loading">
+  <mat-toolbar>
+    <span>Register Vehicle</span>
+  </mat-toolbar>
+  <div *ngIf="openregister">
+    <div class="body">
+      <div class="register">
+        <form #registervehicleform="ngForm" (ngSubmit)="onSubmit(registervehicleform)">
+          <mat-form-field>
+            <mat-label>License Plate</mat-label>
+            <input matInput type="text" name="plate" ngModel required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Brand</mat-label>
+            <input matInput type="text" name="brand" ngModel required>
+          </mat-form-field>
+          <mat-form-field class="width: 100%;">
+            <mat-label>Model</mat-label>
+            <input matInput type="text" name="model" ngModel required>
+          </mat-form-field>
+          <button type="submit" mat-raised-button color="primary">Save</button>
+          <br>
+          <button type="button" mat-raised-button (click)="closeRegister()" color="accent">Cancel</button>
+        </form>
+      </div>
+    </div>
+    <br>
 
-      <button type="submit" mat-raised-button color="primary">Save</button>
-      <br>
+  </div>
+  <div *ngIf="!openregister">
+    <div class="row">
+      <div class="col-md-8 d-flex justify-content-end mt-3 mt-md-0">
+        <button mat-raised-button (click)="openRegister()" color="accent" class="mat-button">
+          <mat-icon>add_circle</mat-icon> Nuevo
+        </button>
+      </div>
+    </div>
+    <br><br>
+    <div class="body1">
+      <div class="register1">
+        <mat-table [dataSource]="data">
+          <!-- Columnas de la tabla -->
+          <ng-container matColumnDef="plate">
+            <mat-header-cell *matHeaderCellDef> License Plate </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.plate }} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="brand">
+            <mat-header-cell *matHeaderCellDef> Brand </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.brand }} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="model">
+            <mat-header-cell *matHeaderCellDef> Model </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.model }} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button mat-raised-button color="warn" (click)="deleteRow(element)">Delete</button>
+            </mat-cell>
+          </ng-container>
 
-      <button type="button" mat-raised-button color="accent">Cancel</button>
-    </form>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+
+      </div>
+    </div>
+    <br><br>
   </div>
 </div>

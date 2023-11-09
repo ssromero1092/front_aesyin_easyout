@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { UsersService } from './users.service';
 
 const urlAPI = environment.apiURL;
@@ -12,22 +14,25 @@ const endpoint = 'vehicle';
   providedIn: 'root'
 })
 export class VehicleService {
-  private token: any;
 
+  protected ngUnsubscribe: Subject<void> = new Subject<void>();
   constructor(
     private http: HttpClient,
-    private usersService: UsersService
   ) {
-
-
-
   }
 
-  createVehicle(data: any): Observable<any> {
+  public createVehicle(data: any): Observable<any> {
     const strEndPoint = urlAPI + endpoint;
-    console.log(strEndPoint);
-
-
     return this.http.post<Response>(strEndPoint,data)
+  }
+
+  public getVehiclebyClient(idClient: string): Observable<{}> {
+    const strEndPoint = urlAPI + endpoint + '?idClient='+idClient;
+    return this.http.get<Response>(strEndPoint, { observe: 'response' }).pipe(takeUntil(this.ngUnsubscribe));
+  }
+
+  public delVehiclebyId(idVehicle: number) : Observable<{}> {
+    const strEndPoint = urlAPI + endpoint +'?idVehicle='+idVehicle;
+    return this.http.delete<Response>(strEndPoint, { observe: 'response'});
   }
 }

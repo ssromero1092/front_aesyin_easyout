@@ -27,6 +27,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { MatTableModule } from '@angular/material/table';
 
 
 
@@ -54,7 +55,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     HttpClientModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule,
 
 
   ],

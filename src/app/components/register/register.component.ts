@@ -49,11 +49,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    console.log(form.value);
-
     const { typeDocument, document, firstName, lastName, email, password, confPassword, phone, address, } = form.value;
-
-
     if (
       !typeDocument ||
       !document ||

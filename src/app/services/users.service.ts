@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders  } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
 import { environment } from 'src/environments/environment';
+import { Router } from "@angular/router";
 
 const urlAPI = environment.apiURL;
 
@@ -14,7 +15,8 @@ export class UsersService {
 
   constructor(
     private http: HttpClient,
-    private cookies: CookieService
+    private cookies: CookieService,
+    private router: Router,
   ) {
 
     const headers = new HttpHeaders()
@@ -36,7 +38,6 @@ export class UsersService {
   register(user: any): Observable<any> {
     const endpoint = 'client';
     const strEndPoint = urlAPI + endpoint;
-    console.log(user);
     return this.http.post<Response>(strEndPoint, user, {  observe: 'response' })
   }
 

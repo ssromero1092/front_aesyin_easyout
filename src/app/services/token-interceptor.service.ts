@@ -16,32 +16,20 @@ export class TokenInterceptorService implements HttpInterceptor{
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-
-
-    //const token: string = this.usersService.getToken();
     const token = sessionStorage.getItem('token');
-
-    console.log(token);
-
     let request = req;
-    //console.log({request});
-
-
     if (token) {
       request = req.clone({
         setHeaders: {
           authorization: `${ token }`,
+          'Content-Type': 'application/json'
         },
       });
-      console.log({request});
     }
     return next.handle(request).pipe(catchError((err: HttpErrorResponse) => {
-
       if (err.status === 401) {
         this.router.navigateByUrl('/login');
       }
-
       return throwError( err );
 
     }));
