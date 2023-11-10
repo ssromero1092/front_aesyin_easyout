@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/easyin_easyout",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

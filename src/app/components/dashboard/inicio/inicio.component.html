@@ -1,3 +1,99 @@
-<mat-toolbar>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<mat-spinner *ngIf="loading" diameter="50" class="spinner"></mat-spinner>
+<div *ngIf="!loading">
+  <mat-toolbar>
     <span>Dashboard</span>
   </mat-toolbar>
+  <br>
+  <div class="row" *ngFor="let item of data">
+    <div class="col-6">
+      <br>
+      <div class="card">
+        <div class="card-header">
+          <h2 style="margin: 0; text-align: center">{{item.fkIdVehicle.plate}} {{item.status}} </h2>
+          <div class="status">
+            <div class="circle" [style.background-color]="item.status === 'ACTIVE' ? '#20D411' : '#FF0000'"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-12">
+                <label class="control-label" style="font-weight: bold;">Entry time / date</label>
+              </div>
+              <div class="col-md-12">
+                <label class="control-label">{{item.entryDate}}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label class="control-label" style="font-weight: bold;">Departure time / date</label>
+              </div>
+              <div class="col-md-12">
+                <label class="control-label">{{item.departureDate}}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label class="control-label" style="font-weight: bold;">Hours of Service</label>
+              </div>
+              <div class="col-md-12">
+                <label class="control-label">{{item.hour}}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label class="control-label" style="font-weight: bold;">Value</label>
+              </div>
+              <div class="col-md-12">
+                <label class="control-label">
+                  {{ item.value | currency:'$':'symbol':'1.2-2' }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <div class="row">
+        <div class="col-md-12 d-flex justify-content-center mt-3 mt-md-0">
+          <button mat-raised-button (click)="openTable()" color="accent" class="mat-button">
+            <mat-icon>add_circle</mat-icon> Record
+          </button>
+    </div>
+  </div>
+  <br><br>
+  <div *ngIf="table" class="row">
+    <div class="col-10">
+      <div class="card">
+        <div class="table-responsive m-t-20">
+          <table class="table table-bordered table-striped table-hover js-exportable">
+            <thead>
+              <tr>
+                <th class="text-left">Plate</th>
+                <th class="text-left">Status</th>
+                <th class="text-left">Entry Date</th>
+                <th class="text-left">Departure Date</th>
+                <th class="text-left">Hour</th>
+                <th class="text-left">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of dataTable">
+              <td class="text-left">{{p.fkIdVehicle.plate}}</td>
+              <td class="text-left">{{p.status}}</td>
+              <td class="text-left">{{p.entryDate}}</td>
+              <td class="text-left">{{p.departureDate}}</td>
+              <td class="text-left">{{p.hour}}</td>
+              <td class="text-left">{{p.value | currency:'$':'symbol':'1.2-2'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>

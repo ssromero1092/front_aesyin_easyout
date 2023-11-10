@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders  } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
 import { environment } from 'src/environments/environment';
-import { Router } from "@angular/router";
 
 const urlAPI = environment.apiURL;
 
@@ -16,7 +15,6 @@ export class UsersService {
   constructor(
     private http: HttpClient,
     private cookies: CookieService,
-    private router: Router,
   ) {
 
     const headers = new HttpHeaders()

@@ -26,7 +26,11 @@ export class RegisterVehicleComponent {
     ) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.list()
+    setTimeout(() => {
+      this.loading = false;
+    }, 1500);
 
   }
 
@@ -42,7 +46,7 @@ export class RegisterVehicleComponent {
       form.resetForm()
         this.openregister=false
         this.list()
-        this.openSnackBar('vahiculo se registro correctamente', '');
+        this.openSnackBar('The vehicle was successfully registered.', '');
 
     },
       (e) => {
@@ -60,19 +64,14 @@ export class RegisterVehicleComponent {
     });
   }
 
-  cargando() {
-    this.loading = true;
-    setTimeout(() => {
-      this.router.navigate(['dashboard']);
-    }, 1500);
-  }
-
 
   list(){
     Promise.all([
       this.vehicleService.getVehiclebyClient(this.idClient).toPromise(),
     ]).then((res:any) => {
       this.data = res[0]['status'] === 200 ? res[0]['body']['data'] : [];
+      console.log(this.data);
+
     });
   }
 
@@ -80,7 +79,7 @@ export class RegisterVehicleComponent {
     const idVehicle=row.idVehicle;
     this.vehicleService.delVehiclebyId(idVehicle).subscribe((res)=>{
       this.list()
-      this.openSnackBar('vahiculo se elimino correctamente', '');
+      this.openSnackBar('The vehicle was successfully removed.', '');
     },(e) => {
       this.openSnackBar(e.error.detail, '');
     });

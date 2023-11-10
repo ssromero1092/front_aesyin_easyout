@@ -36,16 +36,6 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user.typeDocument = 'CC';
-    this.user.document = '1088010149';
-    this.user.firstName = 'Simon';
-    this.user.lastName = 'Romero';
-    this.user.name = 'Simon Romero';
-    this.user.email = 'ssromero@utp.edu.co';
-    this.user.password = '123';
-    this.user.confPassword = '123';
-    this.user.phone = '3136452100';
-    this.user.address = 'calle 123';
   }
 
   onSubmit(form: NgForm): void {

@@ -3,70 +3,94 @@
   <mat-toolbar>
     <span>Register Card</span>
   </mat-toolbar>
-  <div class="body">
-    <div class="register">
-      <form #registercardform="ngForm" (ngSubmit)="onSubmit(registercardform)">
-        <mat-form-field>
-          <mat-label>Credit Card Number</mat-label>
-          <input matInput type="text" name="cardNumber" ngModel required pattern="^[0-9]{16}$">
-          <mat-error *ngIf="registercardform.controls['cardNumber']">
-            Please enter a 16-digit card number.
-          </mat-error>
-        </mat-form-field>
+  <div *ngIf="openregister">
+    <div class="body">
+      <div class="register">
+        <form #registercardform="ngForm" (ngSubmit)="onSubmit(registercardform)">
+          <mat-form-field>
+            <mat-label>Credit Card Number</mat-label>
+            <input matInput type="text" name="number" ngModel required pattern="^[0-9]{16}$">
+            <mat-error *ngIf="registercardform.controls['number']">
+              Please enter a 16-digit card number.
+            </mat-error>
+          </mat-form-field>
 
-        <mat-form-field class="width: 100%;">
-          <mat-label>Due Date (mm/aa)</mat-label>
-          <input matInput type="text" name="dueDate" ngModel required pattern="^(0[1-9]|1[0-2])\/\d{2}$">
-          <mat-error *ngIf="registercardform.controls['dueDate']">
-            Please enter the date in the format 'mm/aa'.
-          </mat-error>
-        </mat-form-field>
+          <mat-form-field class="width: 100%;">
+            <mat-label>Due Date (mm/aa)</mat-label>
+            <input matInput type="text" name="expirationDate" ngModel required pattern="^(0[1-9]|1[0-2])\/\d{2}$">
+            <mat-error *ngIf="registercardform.controls['expirationDate']">
+              Please enter the date in the format 'mm/aa'.
+            </mat-error>
+          </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>CVV</mat-label>
-          <input matInput type="password" name="cvv" ngModel autocomplete="current-password" required>
-        </mat-form-field>
+          <mat-form-field>
+            <mat-label>CVV</mat-label>
+            <input matInput type="password" name="cvv" ngModel autocomplete="current-password" required>
+          </mat-form-field>
 
-        <mat-checkbox name="autoDebit" ngModel>Do you accept automatic debit?</mat-checkbox>
+          <mat-checkbox name="automaticDebit" ngModel>Do you accept automatic debit?</mat-checkbox>
+          <button type="submit" mat-raised-button color="primary">Save</button>
+          <br>
 
-
-        <button type="submit" mat-raised-button color="primary">Save</button>
-        <br>
-
-        <button type="button" mat-raised-button color="accent">Cancel</button>
-      </form>
+          <button type="button" mat-raised-button (click)="cancelRegister()" color="accent">Cancel</button>
+        </form>
+      </div>
     </div>
   </div>
-  <br><br>
-  <div class="body1">
-    <div class="register1">
-      <mat-table [dataSource]="data">
-        <!-- Columnas de la tabla -->
-        <ng-container matColumnDef="cardNumber">
-          <mat-header-cell *matHeaderCellDef> Credit Card Number </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{ element.cardNumber }} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="dueDate">
-          <mat-header-cell *matHeaderCellDef> Due Date </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{ element.dueDate }} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="cvv">
-          <mat-header-cell *matHeaderCellDef> CVV </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{ element.cvv }} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="autoDebit">
-          <mat-header-cell *matHeaderCellDef> Auto Debit </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{ element.autoDebit }} </mat-cell>
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-      </mat-table>
-
+  <div *ngIf="!openregister">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <div class="body1">
+      <br><br>
+      <div class="register1">
+        <div class="card">
+          <div class="card-header">
+            <h2>Registered Card</h2>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="control-label">Number Card</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="control-label"> {{data.number}}</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="control-label">Due Date</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="control-label"> {{data.expirationDate}}</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="control-label">CVV</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="control-label"> {{data.cvv}}</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-4">
+                  <button mat-raised-button (click)="changeRegister()" color="accent">Change Card</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br><br>
     </div>
   </div>
-  <br><br>
+
+
+
 </div>

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe  } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -26,6 +26,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TokenInterceptorService } from 'src/app/services/token-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -57,12 +58,14 @@ import { TokenInterceptorService } from 'src/app/services/token-interceptor.serv
     MatCheckboxModule,
     MatSidenavModule,
     NgbModalModule,
+
   ],
   providers: [
+    DatePipe,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
-      multi: true
+      multi: true,
     }
   ],
   bootstrap: [AppComponent]

@@ -5,6 +5,10 @@
   height: 100vh;
 }
 
+.spinner{
+  margin: 0 auto;
+}
+
 .register-card {
   width: 500px;
 }
@@ -21,3 +25,25 @@ mat-checkbox {
 button {
   margin-right: 10px;
 }
+
+.row{
+  justify-content: center;
+  text-align: center;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status .circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+

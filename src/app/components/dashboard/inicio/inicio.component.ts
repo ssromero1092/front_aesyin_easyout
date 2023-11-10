@@ -1,24 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import { Component, OnInit  } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ServiceService } from 'src/app/services/service.service';
+import { UsersService } from 'src/app/services/users.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-inicio',
@@ -26,13 +10,96 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
+  loading = false;
+  table = false;
+  servicio_status:string='OK'
+  idClient = this.userService.getidClient()
+  data: any[] = [];
+  dataTable: any[] = [];
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-
-  constructor() { }
+  constructor(
+    public serviceService: ServiceService,
+    public userService: UsersService,
+    public snackBar: MatSnackBar,
+    private datePipe: DatePipe
+  ) { }
 
   ngOnInit(): void {
+
+    this.loading = true;
+    this.list()
+    setTimeout(() => {
+      this.loading = false;
+    }, 1500);
+
+  }
+
+  list(){
+    Promise.all([
+      this.serviceService.getServicebyClient(this.idClient).toPromise(),
+    ]).then((res:any) => {
+      const data= res[0]['status'] === 200 ? res[0]['body']['data'] : [];
+      console.log(this.data);
+
+      this.dataTable= res[0]['status'] === 200 ? res[0]['body']['data'] : [];
+
+
+      data.forEach((x:any) => {
+        console.log(x.entryDate);
+
+        x.entryDate= this.datePipe.transform(x.entryDate, 'HH:mm / dd-MM-yyyy');
+        x.departureDate= this.datePipe.transform(x.departureDate, 'HH:mm / dd-MM-yyyy');
+        if (x.status=='ACTIVE') {
+          this.data.push(x)
+        }
+      });
+      //this.data=data;
+
+
+      this.dataTable.sort((a:any, b:any) => {
+        // Primero, ordena por estado (ACTIVO primero)
+        const statusOrder = this.getStatusOrder(b.status) - this.getStatusOrder(a.status);
+
+        // Si el estado es el mismo, ordena por fecha (de más reciente a más antigua)
+        if (statusOrder === 0) {
+          const dateOrder = this.compareDates(b.entryDate, a.entryDate);
+          return dateOrder;
+        }
+
+        return statusOrder;
+      });
+
+
+    });
+
+  }
+
+  openTable(){
+    if (this.table) {
+      this.table=false
+    }else{
+      this.table=true
+    }
+  }
+
+  getStatusOrder(status: string): number {
+    return status === 'ACTIVE' ? 1 : 0;
+  }
+
+  // Función auxiliar para comparar fechas en formato "HH:mm / DD-MM-YYYY"
+  compareDates(dateStrA: string, dateStrB: string): number {
+    const dateA = new Date(this.getFormattedDate(dateStrA));
+    const dateB = new Date(this.getFormattedDate(dateStrB));
+    return dateB.getTime() - dateA.getTime();
+  }
+
+  // Función auxiliar para formatear las fechas en un formato aceptado por el constructor Date
+  getFormattedDate(dateStr: string): string {
+    // Extraer la parte de la fecha y la hora
+    const [, time, date] = dateStr.split(' / ');
+
+    // Obtener el formato "MM/DD/YYYY HH:mm" (puede variar según tus necesidades)
+    return `${date.split('-').reverse().join('/')} ${time}`;
   }
 
 }

@@ -4,18 +4,35 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CardService } from 'src/app/services/card.service';
 import { UsersService } from 'src/app/services/users.service';
+interface CreditCardData {
+  idCreditCard: number;
+  fkIdClient: number;
+  number: string;
+  cvv: number;
+  expirationDate: string;
+  automaticDebit: boolean | null;
+}
 
 @Component({
   selector: 'app-register-card',
   templateUrl: './register-card.component.html',
   styleUrls: ['./register-card.component.css']
 })
-export class RegisterCardComponent implements OnInit {
+export class RegisterCardComponent {
 
   loading = false;
   registercardform: NgForm | null = null;
-  displayedColumns: string[] = ['cardNumber', 'dueDate','cvv', 'autoDebit'];
-  data: any[] = [];
+  displayedColumns: string[] = ['number', 'expirationDate','cvv', 'automaticDebit'];
+  openregister = false;
+  data = {
+    idCreditCard: '',
+    fkIdClient: '',
+    number: '',
+    cvv: '',
+    expirationDate: '',
+    automaticDebit: '',
+  };
+  idClient = this.userService.getidClient()
   constructor(
     public userService: UsersService,
     public cardService: CardService,
@@ -24,22 +41,47 @@ export class RegisterCardComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.loading = true;
+    this.list();
+    setTimeout(() => {
+      this.loading = false;
+    }, 1500);
+
+
+
+  }
+
+  list(){
+    Promise.all([
+      this.cardService.getCreditCardbyClient(this.idClient).toPromise(),
+    ]).then((res:any) => {
+      this.data = res[0]['status'] === 200 ? res[0]['body']['data'] : [];
+      console.log(this.data);
+
+      if (!this.data.number) {
+        this.openregister = true;
+      }
+
+
+
+    });
   }
 
   onSubmit(form: NgForm): void {
     if (form.valid) {
-      const { cardNumber, dueDate, cvv, autoDebit } = form.value;
+      const { number, expirationDate, cvv, automaticDebit} = form.value;
       const idClient = this.userService.getidClient();
       this.cardService.createCard({
-        number:cardNumber,
-        expirationDate:dueDate,
+        number,
+        expirationDate,
         cvv,
-        automaticDebit:autoDebit,
+        automaticDebit,
         fkIdClient:idClient,
       }).subscribe(
         (res) => {
-          this.cargando();
-          this.openSnackBar('The vehicle was registered successfully', '');
+          this.cancelRegister();
+          this.openSnackBar('The card was registered successfully', '');
+          this.list();
         },
         (e) => {
           this.openSnackBar(e.error.detail, '');
@@ -52,11 +94,23 @@ export class RegisterCardComponent implements OnInit {
       duration: 2000,
     });
   }
-  cargando() {
+
+
+  changeRegister(){
     this.loading = true;
     setTimeout(() => {
-      this.router.navigate(['dashboard']);
+      this.loading = false;
+      this.openregister=true
     }, 1500);
+  }
+
+  cancelRegister(){
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+      this.openregister=false
+    }, 1500);
+
   }
 
 }
