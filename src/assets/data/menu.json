@@ -1,6 +1,6 @@
 [
     {
-        "nombre":"Home",
+        "nombre":"inicio",
         "redirect": "/dashboard",
         "icon": "home"
     },

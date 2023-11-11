@@ -4,9 +4,9 @@
     <div *ngIf="!loading">
 
       <form #registerform="ngForm" (ngSubmit)="onSubmit(registerform)">
-        <h2>Register your personal information</h2>
+        <h2>Registra tu información personal</h2>
         <mat-form-field>
-          <mat-label>Document Type</mat-label>
+          <mat-label>Tipo de Documento</mat-label>
           <mat-select [(ngModel)]="user.typeDocument" name="typeDocument" ngModel required>
             <mat-option value="CC">Cédula de Ciudadanía (CC)</mat-option>
             <mat-option value="TI">Tarjeta de Identidad (TI)</mat-option>
@@ -14,46 +14,45 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Document</mat-label>
+          <mat-label>Documento</mat-label>
           <input [(ngModel)]="user.document" matInput type="text" name="document" ngModel required>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>First Name</mat-label>
+          <mat-label>Nombre</mat-label>
           <input [(ngModel)]="user.firstName" matInput type="text" name="firstName" ngModel required>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Last Name</mat-label>
+          <mat-label>Apellido</mat-label>
           <input [(ngModel)]="user.lastName" matInput type="text" name="lastName" ngModel>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Email</mat-label>
+          <mat-label>Correo electronico</mat-label>
           <input [(ngModel)]="user.email" matInput type="email" name="email" ngModel required>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Password</mat-label>
+          <mat-label>Contraseña</mat-label>
           <input [(ngModel)]="user.password" matInput type="password" name="password" ngModel required>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Confirm Password</mat-label>
+          <mat-label>Confirme contraseña</mat-label>
           <input [(ngModel)]="user.confPassword" matInput type="password" name="confPassword" ngModel required>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Phone</mat-label>
+          <mat-label>Telefono</mat-label>
           <input [(ngModel)]="user.phone" matInput type="text" name="phone" ngModel>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Address</mat-label>
+          <mat-label>Direccion</mat-label>
           <input [(ngModel)]="user.address" matInput type="text" name="address" ngModel>
         </mat-form-field>
         <div class="row">
           <div class="col-md-2">
-            <button type="submit" mat-raised-button type="submit" color="primary">Save</button>
+            <button type="submit" mat-raised-button type="submit" color="primary">Guardar</button>
           </div>
           <div class="col-md-2">
-            <button mat-raised-button type="button" color="accent" (click)="login()">Cancel</button>
+            <button mat-raised-button type="button" color="accent" (click)="login()">Cancelar</button>
           </div>
         </div>
-
       </form>
     </div>
   </div>

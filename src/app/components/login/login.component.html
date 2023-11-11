@@ -15,7 +15,7 @@
       <mat-card>
         <mat-card-content>
           <form #loginform="ngForm" (ngSubmit)="onSubmit(loginform)">
-            <h2>Sign in</h2>
+            <h2>Iniciar sesión</h2>
             <mat-form-field>
               <input matInput type="email" name="email" placeholder="Email" ngModel>
               <mat-error>El email no es valido</mat-error>
@@ -25,9 +25,9 @@
               <mat-error>El password no es valido</mat-error>
             </mat-form-field>
             <div style="text-align: center;">
-              <button mat-raised-button type="submit" color="primary">Sign in</button>
+              <button mat-raised-button type="submit" color="primary">Iniciar sesión</button>
               <br><br>
-              <button mat-raised-button color="accent" (click)="createAcocount()">Create account</button>
+              <button mat-raised-button color="accent" (click)="createAcocount()">Crear cuenta</button>
             </div>
           </form>
         </mat-card-content>

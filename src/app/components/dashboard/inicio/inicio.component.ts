@@ -49,7 +49,7 @@ export class InicioComponent implements OnInit {
 
         x.entryDate= this.datePipe.transform(x.entryDate, 'HH:mm / dd-MM-yyyy');
         x.departureDate= this.datePipe.transform(x.departureDate, 'HH:mm / dd-MM-yyyy');
-        if (x.status=='ACTIVE') {
+        if (x.status=='ACTIVO') {
           this.data.push(x)
         }
       });
@@ -83,7 +83,7 @@ export class InicioComponent implements OnInit {
   }
 
   getStatusOrder(status: string): number {
-    return status === 'ACTIVE' ? 1 : 0;
+    return status === 'ACTIVO' ? 1 : 0;
   }
 
   // Función auxiliar para comparar fechas en formato "HH:mm / DD-MM-YYYY"

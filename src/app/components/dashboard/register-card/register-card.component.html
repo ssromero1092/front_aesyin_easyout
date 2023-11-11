@@ -8,15 +8,15 @@
       <div class="register">
         <form #registercardform="ngForm" (ngSubmit)="onSubmit(registercardform)">
           <mat-form-field>
-            <mat-label>Credit Card Number</mat-label>
+            <mat-label>Número de Tarjeta de Crédito</mat-label>
             <input matInput type="text" name="number" ngModel required pattern="^[0-9]{16}$">
             <mat-error *ngIf="registercardform.controls['number']">
-              Please enter a 16-digit card number.
+              Por favor ingrese un número de tarjeta de 16 dígitos.
             </mat-error>
           </mat-form-field>
 
           <mat-form-field class="width: 100%;">
-            <mat-label>Due Date (mm/aa)</mat-label>
+            <mat-label>Fecha de vencimiento (mm/aa)</mat-label>
             <input matInput type="text" name="expirationDate" ngModel required pattern="^(0[1-9]|1[0-2])\/\d{2}$">
             <mat-error *ngIf="registercardform.controls['expirationDate']">
               Please enter the date in the format 'mm/aa'.

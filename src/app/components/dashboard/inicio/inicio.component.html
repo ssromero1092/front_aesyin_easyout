@@ -12,14 +12,14 @@
         <div class="card-header">
           <h2 style="margin: 0; text-align: center">{{item.fkIdVehicle.plate}} {{item.status}} </h2>
           <div class="status">
-            <div class="circle" [style.background-color]="item.status === 'ACTIVE' ? '#20D411' : '#FF0000'"></div>
+            <div class="circle" [style.background-color]="item.status === 'ACTIVO' ? '#20D411' : '#FF0000'"></div>
           </div>
         </div>
         <div class="card-body">
           <div class="form-group">
             <div class="row">
               <div class="col-md-12">
-                <label class="control-label" style="font-weight: bold;">Entry time / date</label>
+                <label class="control-label" style="font-weight: bold;">Hora / fecha de entrada</label>
               </div>
               <div class="col-md-12">
                 <label class="control-label">{{item.entryDate}}</label>
@@ -27,7 +27,7 @@
             </div>
             <div class="row">
               <div class="col-md-12">
-                <label class="control-label" style="font-weight: bold;">Departure time / date</label>
+                <label class="control-label" style="font-weight: bold;">Hora / fecha de salida</label>
               </div>
               <div class="col-md-12">
                 <label class="control-label">{{item.departureDate}}</label>
@@ -35,7 +35,7 @@
             </div>
             <div class="row">
               <div class="col-md-12">
-                <label class="control-label" style="font-weight: bold;">Hours of Service</label>
+                <label class="control-label" style="font-weight: bold;">Horas de servicio</label>
               </div>
               <div class="col-md-12">
                 <label class="control-label">{{item.hour}}</label>
@@ -43,7 +43,7 @@
             </div>
             <div class="row">
               <div class="col-md-12">
-                <label class="control-label" style="font-weight: bold;">Value</label>
+                <label class="control-label" style="font-weight: bold;">Valor</label>
               </div>
               <div class="col-md-12">
                 <label class="control-label">
@@ -60,7 +60,7 @@
   <div class="row">
         <div class="col-md-12 d-flex justify-content-center mt-3 mt-md-0">
           <button mat-raised-button (click)="openTable()" color="accent" class="mat-button">
-            <mat-icon>add_circle</mat-icon> Record
+            <mat-icon>add_circle</mat-icon> Registro
           </button>
     </div>
   </div>
@@ -72,12 +72,12 @@
           <table class="table table-bordered table-striped table-hover js-exportable">
             <thead>
               <tr>
-                <th class="text-left">Plate</th>
-                <th class="text-left">Status</th>
-                <th class="text-left">Entry Date</th>
-                <th class="text-left">Departure Date</th>
-                <th class="text-left">Hour</th>
-                <th class="text-left">Value</th>
+                <th class="text-left">Placa</th>
+                <th class="text-left">Estado</th>
+                <th class="text-left">Fecha de entrada</th>
+                <th class="text-left">Fecha de salida</th>
+                <th class="text-left">Hora</th>
+                <th class="text-left">Valor</th>
               </tr>
             </thead>
             <tbody>
