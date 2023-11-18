@@ -56,14 +56,9 @@ export class RegisterCardComponent {
       this.cardService.getCreditCardbyClient(this.idClient).toPromise(),
     ]).then((res:any) => {
       this.data = res[0]['status'] === 200 ? res[0]['body']['data'] : [];
-      console.log(this.data);
-
       if (!this.data.number) {
         this.openregister = true;
       }
-
-
-
     });
   }
 
@@ -80,7 +75,7 @@ export class RegisterCardComponent {
       }).subscribe(
         (res) => {
           this.cancelRegister();
-          this.openSnackBar('The card was registered successfully', '');
+          this.openSnackBar('La tarjeta fue registrada exitosamente.', '');
           this.list();
         },
         (e) => {

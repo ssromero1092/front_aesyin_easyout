@@ -46,9 +46,9 @@ export class RegisterComponent implements OnInit {
       !password ||
       !confPassword
     ) {
-      this.openSnackBar('Please complete all required fields', '');
+      this.openSnackBar('Por favor completa todos los campos requeridos', '');
     } else if (password !== confPassword) {
-      this.openSnackBar('Passwords do not match', '');
+      this.openSnackBar('Las contraseñas no coinciden', '');
     } else {
       const name = firstName + ' ' + lastName
 

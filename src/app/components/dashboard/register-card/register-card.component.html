@@ -1,7 +1,7 @@
 <mat-spinner *ngIf="loading" diameter="50" class="spinner"></mat-spinner>
 <div *ngIf="!loading">
   <mat-toolbar>
-    <span>Register Card</span>
+    <span>Tarjeta de registro</span>
   </mat-toolbar>
   <div *ngIf="openregister">
     <div class="body">
@@ -19,7 +19,7 @@
             <mat-label>Fecha de vencimiento (mm/aa)</mat-label>
             <input matInput type="text" name="expirationDate" ngModel required pattern="^(0[1-9]|1[0-2])\/\d{2}$">
             <mat-error *ngIf="registercardform.controls['expirationDate']">
-              Please enter the date in the format 'mm/aa'.
+              Por favor ingrese la fecha en el formato 'mm/aa'.
             </mat-error>
           </mat-form-field>
 
@@ -28,11 +28,11 @@
             <input matInput type="password" name="cvv" ngModel autocomplete="current-password" required>
           </mat-form-field>
 
-          <mat-checkbox name="automaticDebit" ngModel>Do you accept automatic debit?</mat-checkbox>
-          <button type="submit" mat-raised-button color="primary">Save</button>
+          <mat-checkbox name="automaticDebit" ngModel>¿Acepta débito automático?</mat-checkbox>
+          <button type="submit" mat-raised-button color="primary">Guardar</button>
           <br>
 
-          <button type="button" mat-raised-button (click)="cancelRegister()" color="accent">Cancel</button>
+          <button type="button" mat-raised-button (click)="cancelRegister()" color="accent">Cancelar</button>
         </form>
       </div>
     </div>
@@ -44,13 +44,13 @@
       <div class="register1">
         <div class="card">
           <div class="card-header">
-            <h2>Registered Card</h2>
+            <h2>Tarjeta registrada</h2>
           </div>
           <div class="card-body">
             <div class="form-group">
               <div class="row">
                 <div class="col-md-6">
-                  <label class="control-label">Number Card</label>
+                  <label class="control-label">Tarjeta numérica</label>
                 </div>
                 <div class="col-md-6">
                   <label class="control-label"> {{data.number}}</label>
@@ -60,7 +60,7 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-md-6">
-                  <label class="control-label">Due Date</label>
+                  <label class="control-label">Fecha de vencimiento</label>
                 </div>
                 <div class="col-md-6">
                   <label class="control-label"> {{data.expirationDate}}</label>
@@ -80,7 +80,7 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-md-4">
-                  <button mat-raised-button (click)="changeRegister()" color="accent">Change Card</button>
+                  <button mat-raised-button (click)="changeRegister()" color="accent">Cambiar tarjeta</button>
                 </div>
               </div>
             </div>

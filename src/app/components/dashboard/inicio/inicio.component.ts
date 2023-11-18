@@ -39,14 +39,8 @@ export class InicioComponent implements OnInit {
       this.serviceService.getServicebyClient(this.idClient).toPromise(),
     ]).then((res:any) => {
       const data= res[0]['status'] === 200 ? res[0]['body']['data'] : [];
-      console.log(this.data);
-
       this.dataTable= res[0]['status'] === 200 ? res[0]['body']['data'] : [];
-
-
       data.forEach((x:any) => {
-        console.log(x.entryDate);
-
         x.entryDate= this.datePipe.transform(x.entryDate, 'HH:mm / dd-MM-yyyy');
         x.departureDate= this.datePipe.transform(x.departureDate, 'HH:mm / dd-MM-yyyy');
         if (x.status=='ACTIVO') {

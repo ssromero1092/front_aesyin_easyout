@@ -20,7 +20,6 @@ export class ServiceService {
 
   public getServicebyClient(idClient: string): Observable<{}> {
     const strEndPoint = urlAPI + endpoint + '?idClient='+idClient;
-    console.log(strEndPoint);
     return this.http.get<Response>(strEndPoint, { observe: 'response' }).pipe(takeUntil(this.ngUnsubscribe));
   }
 }

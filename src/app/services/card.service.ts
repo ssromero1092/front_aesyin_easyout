@@ -21,10 +21,7 @@ export class CardService {
     ) { }
 
   public createCard(data: any): Observable<any> {
-    console.log(data);
-
     const strEndPoint = urlAPI + endpoint;
-    console.log(strEndPoint);
     return this.http.post<Response>(strEndPoint,data)
   }
 
@@ -35,7 +32,6 @@ export class CardService {
 
   public delCreditCardbyId(idCreditCard: string) : Observable<{}> {
     const strEndPoint = urlAPI + endpoint +'?idCreditCard='+idCreditCard;
-    console.log(strEndPoint);
     return this.http.delete<Response>(strEndPoint, { observe: 'response'});
   }
 }

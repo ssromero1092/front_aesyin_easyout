@@ -46,7 +46,7 @@ export class RegisterVehicleComponent {
       form.resetForm()
         this.openregister=false
         this.list()
-        this.openSnackBar('The vehicle was successfully registered.', '');
+        this.openSnackBar('El vehículo fue registrado exitosamente.', '');
 
     },
       (e) => {
@@ -70,8 +70,6 @@ export class RegisterVehicleComponent {
       this.vehicleService.getVehiclebyClient(this.idClient).toPromise(),
     ]).then((res:any) => {
       this.data = res[0]['status'] === 200 ? res[0]['body']['data'] : [];
-      console.log(this.data);
-
     });
   }
 
@@ -79,7 +77,7 @@ export class RegisterVehicleComponent {
     const idVehicle=row.idVehicle;
     this.vehicleService.delVehiclebyId(idVehicle).subscribe((res)=>{
       this.list()
-      this.openSnackBar('The vehicle was successfully removed.', '');
+      this.openSnackBar('El vehículo fue eliminado con éxito.', '');
     },(e) => {
       this.openSnackBar(e.error.detail, '');
     });
